@@ -12,7 +12,7 @@
   | obtain it through the world-wide-web, please send a note to          |
   | license@php.net so we can mail you a copy immediately.               |
   +----------------------------------------------------------------------+
-  | Author:                                                              |
+  | Author: Ady Romantika <ady.romantika@gmail.com>                      |
   +----------------------------------------------------------------------+
 */
 
@@ -20,6 +20,8 @@
 
 #ifndef PHP_PHONENUMBER_H
 #define PHP_PHONENUMBER_H
+
+#define PHP_PHONENUMBER_VERSION   "0.1"
 
 extern zend_module_entry phonenumber_module_entry;
 #define phpext_phonenumber_ptr &phonenumber_module_entry
@@ -43,16 +45,15 @@ PHP_RSHUTDOWN_FUNCTION(phonenumber);
 PHP_MINFO_FUNCTION(phonenumber);
 
 PHP_FUNCTION(confirm_phonenumber_compiled);	/* For testing, remove later. */
-
-/* 
-  	Declare any global variables you may need between the BEGIN
-	and END macros here:     
+/* Declare the PHP functions provided by this extension */
+PHP_FUNCTION(get_international_number);
+PHP_FUNCTION(is_valid_number_for_region);
 
 ZEND_BEGIN_MODULE_GLOBALS(phonenumber)
-	long  global_value;
-	char *global_string;
+	char *global_default_region;
 ZEND_END_MODULE_GLOBALS(phonenumber)
-*/
+
+void register_HasProperties(TSRMLS_D);
 
 /* In every utility function you add that needs to use variables 
    in php_phonenumber_globals, call TSRMLS_FETCH(); after declaring other 
