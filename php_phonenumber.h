@@ -22,6 +22,7 @@
 #define PHP_PHONENUMBER_H
 
 #define PHP_PHONENUMBER_VERSION   "0.1"
+#define PHP_PHONENUMBER_EXTNAME   "phonenumber"
 
 extern zend_module_entry phonenumber_module_entry;
 #define phpext_phonenumber_ptr &phonenumber_module_entry
@@ -53,7 +54,23 @@ ZEND_BEGIN_MODULE_GLOBALS(phonenumber)
 	char *global_default_region;
 ZEND_END_MODULE_GLOBALS(phonenumber)
 
-void register_HasProperties(TSRMLS_D);
+// Object related
+#define PHONENUMBER_NUMBERTYPE_FIXED_LINE 1
+#define PHONENUMBER_NUMBERTYPE_MOBILE 2
+#define PHONENUMBER_NUMBERTYPE_FIXED_LINE_OR_MOBILE 3
+#define PHONENUMBER_NUMBERTYPE_TOLL_FREE 4
+#define PHONENUMBER_NUMBERTYPE_PREMIUM_RATE 5
+#define PHONENUMBER_NUMBERTYPE_SHARED_COST 6
+#define PHONENUMBER_NUMBERTYPE_VOIP 7
+#define PHONENUMBER_NUMBERTYPE_PERSONAL_NUMBER 8
+#define PHONENUMBER_NUMBERTYPE_PAGER 9
+#define PHONENUMBER_NUMBERTYPE_UAN 10
+#define PHONENUMBER_NUMBERTYPE_VOICEMAIL 11
+#define PHONENUMBER_NUMBERTYPE_UNKNOWN 12
+
+void phonenumber_init(TSRMLS_D);
+PHP_METHOD(PhoneNumber, __construct);
+PHP_METHOD(PhoneNumber, formatOutOfCountryCallingNumber);
 
 /* In every utility function you add that needs to use variables 
    in php_phonenumber_globals, call TSRMLS_FETCH(); after declaring other 
